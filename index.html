@@ -97,7 +97,19 @@
       </table> 
 
       <div class="row print">
-        <button onclick="print()" class="mx-auto btn btn-primary">Print data in csv format</button></div>
+        <div class="form-group col-md-6">
+          <label for="inputState">Choose the type of document to print</label>
+          <select id="printoption"   class="form-control">
+            <option value="csv" selected>csv</option>
+            <option value="json" >json</option>
+            <option value="sql">sql</option>
+          </div>
+           </select>
+        </div>
+        <div class="col-md-6">
+
+          <button onclick="print()" class=" btn btn-primary mx-auto ">Print data </button>
+        </div>
       </div>
 
 

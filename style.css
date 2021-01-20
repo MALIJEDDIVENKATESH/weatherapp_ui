@@ -129,7 +129,10 @@ table{
     }
 
     .print{
-        margin-top: 40px !important;
+        margin: 40px 0px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 

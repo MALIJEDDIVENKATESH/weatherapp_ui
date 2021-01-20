@@ -79,9 +79,12 @@ async function fetchdata(){
 
 function print()
 {
+
+  var printoption=document.getElementById('printoption');
+  alert( printoption.value)
   datatable.export({
-    type: "csv",
-    filename: "my-csv-file",
+    type: printoption.value,
+    filename: "weatherdata",
     selection: datatable.currentPage
 });
 
