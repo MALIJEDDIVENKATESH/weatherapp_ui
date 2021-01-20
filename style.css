@@ -108,6 +108,8 @@ table{
 .cities{
     background-color: white;
     margin: 50px auto;
+    overflow-x: scroll;
+
     
 }
 .detailsheading{
