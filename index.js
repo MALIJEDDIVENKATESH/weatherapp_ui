@@ -33,7 +33,7 @@ async function fetchdata(){
     const result=await data.json();
    
     
-    temp.innerHTML=`Temperature ${result.main.temp} &deg C`
+    temp.innerHTML=`Temperature ${parseInt(result.main.temp)} &deg C`
     locname.innerHTML=`Location : ${result.name} `
     tempstatus.innerHTML=`Weather :${result.weather[0].main}  `
     mintemp.innerHTML=`Min Temp ${result.main.temp_min} &deg C`
@@ -58,10 +58,31 @@ async function fetchdata(){
        tbody.innerHTML+=`<tr scope="row"><td>${value.name}</td><td>${value.main.temp} &deg C</td><td>${value.main.temp_min} &deg C</td><td>${value.main.temp_max} &deg C</td><td>${value.weather[0].main} </td><td>${value.main.feels_like} &deg C</td><td>${value.wind.speed} m/sec </td></tr>`;
     })
     
-    $('#cities').DataTable();
+
+     datatable= new simpleDatatables.DataTable("#cities",{
+       exportable:{
+         type:"json",
+         download:true,
+
+       }
+     })
+    
+   
 
 
 
 
+
+
+}
+
+
+function print()
+{
+  datatable.export({
+    type: "csv",
+    filename: "my-csv-file",
+    selection: datatable.currentPage
+});
 
 }

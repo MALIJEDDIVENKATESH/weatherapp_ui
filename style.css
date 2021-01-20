@@ -30,7 +30,8 @@ form{
     
 }
 .row{
-    margin: 0 !important;
+    margin: 10px 0 !important;
+    
 }
 
      
@@ -65,8 +66,6 @@ hr{
 .icon{
     text-align: center;
     margin: 60px auto;
-    height: 100px;
-    width: 100px;
 }
 
 .icon img{
@@ -104,11 +103,7 @@ table{
     font-size: 30px;
     font-weight: 500;
 }
-#cities_wrapper{
-    margin-bottom: 70px;
-    background-color:#fff;
 
-}
 
 .cities{
     background-color: white;
@@ -131,6 +126,10 @@ table{
         background-color:rgba(255, 65, 75, 0.897); 
         display: block;    
             
+    }
+
+    .print{
+        margin-top: 40px !important;
     }
 
 
