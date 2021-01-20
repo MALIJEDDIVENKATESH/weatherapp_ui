@@ -93,7 +93,7 @@ function print()
 {
 
   var printoption=document.getElementById('printoption');
-  if(confirm(`Do you want  print in ${printoption.value} format`))
+  if(confirm(`Do you want to print in ${printoption.value} format`))
   {
 
   datatable.export({

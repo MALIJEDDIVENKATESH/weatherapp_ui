@@ -97,8 +97,17 @@ hr{
 table{
     width: 100%;
     background-color: white;
+    
 }
 
+.dataTable-wrapper{
+    
+    overflow-x: scroll;
+}
+
+.dataTable-wrapper::-webkit-scrollbar {
+    display: none;
+  }
 .cityheading{
     font-size: 30px;
     font-weight: 500;
@@ -108,7 +117,6 @@ table{
 .cities{
     background-color: white;
     margin: 50px auto;
-    overflow-x: scroll;
 
     
 }
