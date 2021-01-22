@@ -6,8 +6,22 @@ var maxtemp=document.getElementById('maxtemp')
 var tempstatus=document.getElementById('tempstatus')
 var icon=document.getElementById('icon')
 var date=document.getElementById('date')
+var tbody=document.getElementById('tablebody');
 
+function resetdata()
+{
+  temp.innerHTML=''
+  locname.innerHTML=''
+  tempstatus.innerHTML=''
+  mintemp.innerHTML=''
+  maxtemp.innerHTML=''
+  windspeed.innerHTML=''
+  date.innerHTML=''
+  icon.innerHTML ='';
+  tbody.innerHTML='';
+  
 
+}
 
 
 
@@ -33,10 +47,12 @@ async function fetchdata(){
   var input =document.getElementById('city').value;
   event.preventDefault()
   
+
+
   try{
 
     const data=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=374abe7635cad005595d3765035c9d63` )
-    const result=await data.json();
+    var result=await data.json();
     
     
     temp.innerHTML=`Temperature ${parseInt(result.main.temp)} &deg C`
@@ -46,7 +62,6 @@ async function fetchdata(){
     maxtemp.innerHTML=`Max Temp ${result.main.temp_max} &deg C`
     windspeed.innerHTML=`Wind speed  ${result.wind.speed} m/sec`
     date.innerHTML=`Time : ${new Date().toLocaleTimeString()} `
-    // var status=result.weather[0].main;
     var iconimg=result.weather[0].icon;
     icon.innerHTML =`<img src="http://openweathermap.org/img/wn/${iconimg}@2x.png"></img>` ;
     
@@ -56,17 +71,52 @@ async function fetchdata(){
   
   catch(err)
   {
-    alert(err)
-    return ;
+    alert(result.message);
+    input=document.getElementById('city');
+    input.value='';
+    return;
+    
   }
   
   try{
     
     const {latitude,longitude}= await getdata(input);
+
+    if( ! localStorage.getItem('searchedcities') )
+    {
+      var searchedcities={"cities":[]}
+      var city=JSON.stringify({
+    
+        "cityname":input,
+        "latitude":latitude,
+        "longitude":latitude,
+      
+      })
+      searchedcities.cities.push(city)
+
+      localStorage.setItem('searchedcities',JSON.stringify(searchedcities))
+
+    }
+
+    else{
+      var searchedcities=JSON.parse(localStorage.getItem('searchedcities'));
+      searchedcities.cities.push(JSON.stringify(
+        {
+      "cityname":input,
+      "latitude":latitude,
+      "longitude":latitude,
+    
+    })
+      )
+
+      localStorage.setItem('searchedcities',JSON.stringify(searchedcities))
+
+    }
+
+ 
    const places=await fetch(`https://api.openweathermap.org/data/2.5/find?&lat=${latitude}&lon=${longitude}&cnt=25&units=metric&appid=374abe7635cad005595d3765035c9d63`)
    const placedata=await places.json();
    const placesdata =placedata.list;
-   var tbody=document.getElementById('tablebody');
    tbody.innerHTML='';
    placesdata.map((value,index)=>{
       //  tbody.insertAdjacentHTML("beforeend",`<tr scope="row"><td>${value.name}</td><td>${value.main.temp} &deg C</td><td>${value.main.temp_min} &deg C</td><td>${value.main.temp_max} &deg C</td><td>${value.weather[0].main} </td><td>${value.main.feels_like} &deg C</td><td>${value.wind.speed} m/sec </td></tr>`);
