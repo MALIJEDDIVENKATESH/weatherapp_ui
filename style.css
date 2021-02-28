@@ -79,6 +79,19 @@ hr{
     font-weight: bold;
 
 }
+
+.dt-button {
+    width: 100px;
+    height: 40px;
+    background-color:rgba(255, 22, 22, 0.897); 
+    margin: 10px 30px;
+    border: none;
+    /* background-color: red; */
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.3);
+
+}
 .container-fluid{
     margin: 0;
     padding: 0;
